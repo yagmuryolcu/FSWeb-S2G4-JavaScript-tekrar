@@ -39,6 +39,8 @@ const sayilar = [
 function KareninAlani(kenaruzunlugu) {
   return kenaruzunlugu * kenaruzunlugu;
 }
+const alan = KareninAlani(10);
+console.log("Karenin Alanı:", alan)
 
 /* (Oto test yok) Yukarıdaki KareninAlani fonksiyonunu kenar uzunluğu = 10 vererek aşağıda çalıştırıp, sonucu konsolda gözlemleyin (console.log)  */
 
@@ -50,9 +52,12 @@ function KareninAlani(kenaruzunlugu) {
 	4. Hesaplanan çemberin çevresi döndürülecektir.
 */
 
-function CemberinCevresi(/* kodlar buraya */) {
-  /* kodlar buraya */
+function CemberinCevresi(yaricap) {
+  const cevre = 2 * pi * yaricap;
+  return cevre;
 }
+const sonuc = CemberinCevresi(5);
+console.log("Çemberin çevresi:", sonuc); 
 
 /* (Oto test yok) Yukarıdaki CemberinCevresi fonksiyonunu yarıçap = 5 vererek aşağıda çalıştırıp, sonucu konsolda gözlemleyin (console.log)  */
 
@@ -64,9 +69,13 @@ function CemberinCevresi(/* kodlar buraya */) {
 	4. Hesaplanan çemberin alanı döndürülecektir.
 */
 
-function CemberinAlani(/* kodlar buraya */) {
-  /* kodlar buraya */
+function CemberinAlani( yaricapp, piDeğeri) {
+  const cemberAlan = piDeğeri * Math.pow(yaricapp, 2);
+  return cemberAlan;
 }
+const son = CemberinAlani(15, pi);
+console.log("Çemberin Alanı:", son);  // Çıktı: Çemberin Alanı: 706.5
+
 
 /* (Oto test yok) Yukarıdaki CemberinAlani fonksiyonunu yarıçap = 15 vererek aşağıda çalıştırıp, sonucu konsolda gözlemleyin (console.log)  */
 
@@ -88,14 +97,40 @@ function CemberinAlani(/* kodlar buraya */) {
 */
 
 /*  (oto test yok) sayilar dizisi içinde kaç adet sayı olduğunu konsola yazdırın */
+const sayilar2 = [];
 
-let ucetambolunenler,
-  enkucuk,
-  enbuyuk,
-  ucebolunenlerintoplami,
-  besyuzdenkucuksayilar,
-  siralisayilar,
-  tekraredensayilar;
+for (let i = 0; i < 100; i++) {
+  const rastgeleSayi = Math.random() * 1000; // 0 ile 1000 arasında ondalıklı
+  sayilar2.push(Number(rastgeleSayi.toFixed(2))); // Maksimum 2 ondalık basamak
+}
+let ucetambolunenler = [];
+sayilar2.forEach((sayi) => {
+  if (sayi % 3 === 0) {
+    ucetambolunenler.push(sayi);
+  }
+});
+
+let ucebolunenlerintoplami = ucetambolunenler.reduce((a, b) => a + b, 0);
+
+let besyuzdenkucuksayilar = sayilar2.filter((sayi) => sayi < 500);
+
+let siralisayilar = [...besyuzdenkucuksayilar].sort((a, b) => a - b);
+
+let tekrarSayilari = {};
+let tekraredensayilar = [];
+
+sayilar2.forEach((sayi) => {
+  const key = sayi.toString();
+  tekrarSayilari[key] = (tekrarSayilari[key] || 0) + 1;
+});
+
+for (let sayi in tekrarSayilari) {
+  if (tekrarSayilari[sayi] > 1) {
+    tekraredensayilar.push(`${sayi} sayısı ${tekrarSayilari[sayi]} kere tekrar edilmiştir`);
+  }
+}
+
+console.log("Toplam sayı adedi:", sayilar2.length);
 
 // 3a çözümü
 
